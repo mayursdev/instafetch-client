@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import DownloadSection from "./components/DownloadSection";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Navbar />
       <Header />
       <DownloadSection />
+      <Footer />
     </div>
   );
 }
