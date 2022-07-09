@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import DownloadSection from "./components/DownloadSection";
 import Footer from "./components/Footer";
 
+const InstaAPIBaseURL = `http://localhost:3001`;
+
 function App() {
   const [postCode, setPostCode] = useState("");
   const [postDetails, setPostDetails] = useState({});
@@ -23,7 +25,12 @@ function App() {
   useEffect(() => {
     if (!postCode) return;
     // make api call to fetch post details
-    console.log(postCode);
+    (async () => {
+      const response = await fetch(`${InstaAPIBaseURL}/posts/${postCode}`);
+      const postDetailsResp = await response.json();
+      if (postDetailsResp.status === "fail") return;
+      setPostDetails(postDetailsResp.postDetails);
+    })();
   }, [postCode]);
 
   return (
