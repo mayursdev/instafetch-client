@@ -12,7 +12,7 @@ const ImagePost = (props) => {
       <a
         target="_blank"
         rel="noreferrer"
-        href={imgSources[0].url}
+        href={`${imgSources[0].url}&dl=1`}
         className="default-button block text-center w-full font-semibold mt-1 bg-slate-700 hover:bg-slate-800 text-white rounded p-2"
       >
         Download Full HD Image
@@ -29,7 +29,7 @@ const ImagePost = (props) => {
               key={idx}
               target="_blank"
               rel="noreferrer"
-              href={src.url}
+              href={`${src.url}&dl=1`}
               className="block text-center w-full font-semibold mb-1 border border-slate-800 rounded p-1"
             >
               Download {src.width}px
