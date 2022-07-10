@@ -3,9 +3,8 @@ import PostHeader from "./PostHeader";
 import PostMedia from "./PostMedia";
 
 const ImagePost = (props) => {
-  const { postDetails } = props;
+  const { postDetails, user } = props;
 
-  const user = postDetails.user;
   const imgSources = postDetails.image_versions;
 
   const renderDefaultDownloadBtn = () => {
@@ -22,7 +21,7 @@ const ImagePost = (props) => {
   };
   const renderOtherDownloadOptions = () => {
     return (
-      <div className="more-download-options rounded mt-1">
+      <div className="more-download-options rounded mt-1 hidden">
         {imgSources.map((src, idx) => {
           if (idx === 0 || idx > 5) return null;
           return (
@@ -44,7 +43,7 @@ const ImagePost = (props) => {
   return (
     <div className="post-card-wrapper image mb-3 sm:w-1/2 sm:pr-3 lg:w-1/3">
       <div className="post-card border flex flex-col border-slate-400 p-5 rounded">
-        <PostHeader user={user} iconName="video" />
+        <PostHeader user={user} iconName="image" />
         <PostMedia postDetails={postDetails} />
         <div className="download-buttons mt-1">
           {renderDefaultDownloadBtn()}

@@ -3,9 +3,8 @@ import PostHeader from "./PostHeader";
 import PostMedia from "./PostMedia";
 
 const ImagePost = (props) => {
-  const { postDetails } = props;
+  const { postDetails, user } = props;
 
-  const user = postDetails.user;
   const videoSources = postDetails.video_versions;
 
   const renderDefaultDownloadBtn = () => {
@@ -23,7 +22,7 @@ const ImagePost = (props) => {
 
   const renderOtherDownloadOptions = () => {
     return (
-      <div className="more-download-options rounded mt-1">
+      <div className="more-download-options rounded mt-1 hidden">
         {videoSources.map((src, idx) => {
           if (idx === 0 || idx > 1) return null;
           return (
