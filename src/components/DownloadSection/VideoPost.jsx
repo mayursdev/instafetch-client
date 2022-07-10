@@ -23,7 +23,7 @@ const ImagePost = (props) => {
 
   const renderOtherDownloadOptions = () => {
     return (
-      <div className="more-download-options rounded mt-1 hidden">
+      <div className="more-download-options rounded mt-1">
         {videoSources.map((src, idx) => {
           if (idx === 0 || idx > 1) return null;
           return (
