@@ -1,4 +1,5 @@
 import React from "react";
+import MoreDownloadOptions from "./MoreDownloadOptions";
 import PostHeader from "./PostHeader";
 import PostMedia from "./PostMedia";
 
@@ -48,11 +49,9 @@ const ImagePost = (props) => {
         <PostMedia postDetails={postDetails} />
         <div className="download-buttons mt-1">
           {renderDefaultDownloadBtn()}
-          <button className="w-full font-semibold bg-orange-200 border border-slate-800 cursor-pointer mt-1 p-1 rounded">
-            More download options
-            <i className="bx bxs-down-arrow text-sm" />
-          </button>
-          {renderOtherDownloadOptions()}
+          <MoreDownloadOptions>
+            {renderOtherDownloadOptions()}
+          </MoreDownloadOptions>
         </div>
       </div>
     </div>
