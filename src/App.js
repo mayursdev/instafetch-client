@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import DownloadSection from "./components/DownloadSection";
 import Footer from "./components/Footer";
 
-const InstaAPIBaseURL = `http://localhost:3001`;
+const InstaAPIBaseURL = `http://localhost:5000`;
 
 function App() {
   const [postCode, setPostCode] = useState("");
@@ -37,7 +37,7 @@ function App() {
     <div className="font-nunito">
       <Navbar />
       <Header onFormSubmit={onFormSubmit} />
-      <DownloadSection />
+      <DownloadSection postDetails={postDetails} />
       <Footer />
     </div>
   );
