@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## 🔧 .env SETUP
+
+Rename the .env_sample file in the root of project to .env and add in the url where the API server is running. Example: REACT_APP_API_SERVER_BASEURL=http://localhost:500
+
 ## Available Scripts
 
 In the project directory, you can run:
