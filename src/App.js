@@ -9,6 +9,7 @@ const InstaAPIBaseURL = process.env.REACT_APP_API_SERVER_BASEURL;
 function App() {
   const [postCode, setPostCode] = useState("");
   const [postDetails, setPostDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const onFormSubmit = (link) => {
     // extract code from link
@@ -26,10 +27,12 @@ function App() {
     if (!postCode) return;
     // make api call to fetch post details
     (async () => {
+      setIsLoading((prev) => !prev);
       const response = await fetch(`${InstaAPIBaseURL}/posts/${postCode}`);
       const postDetailsResp = await response.json();
       if (postDetailsResp.status === "fail") return;
       setPostDetails(postDetailsResp.postDetails);
+      setIsLoading((prev) => !prev);
     })();
   }, [postCode]);
 
@@ -37,7 +40,7 @@ function App() {
     <div className="font-nunito">
       <Navbar />
       <Header onFormSubmit={onFormSubmit} />
-      <DownloadSection postDetails={postDetails} />
+      <DownloadSection postDetails={postDetails} isLoading={isLoading} />
       <Footer />
     </div>
   );

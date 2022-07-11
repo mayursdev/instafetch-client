@@ -32,7 +32,7 @@ const PostItems = (props) => {
   };
 
   return (
-    <div className="posts-list container mx-auto sm:flex sm:flex-wrap sm:gap-0 sm:justify-center">
+    <div className="posts-list container mx-auto py-4 md:py-6 sm:flex sm:flex-wrap sm:gap-0 sm:justify-center">
       {renderPost(postDetails)}
     </div>
   );

@@ -42,7 +42,7 @@ const ImagePost = (props) => {
   };
 
   return (
-    <div className="post-card-wrapper image mb-3 sm:w-1/2 sm:pr-3 lg:w-1/3">
+    <div className="post-card-wrapper image pb-3 sm:w-1/2 sm:pr-3 lg:w-1/3">
       <div className="post-card border flex flex-col border-slate-400 p-5 rounded">
         <PostHeader user={user} iconName="image" />
         <PostMedia postDetails={postDetails} />
