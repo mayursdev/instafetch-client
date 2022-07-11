@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import DownloadSection from "./components/DownloadSection";
 import Footer from "./components/Footer";
 
-const InstaAPIBaseURL = `http://localhost:5000`;
+const InstaAPIBaseURL = process.env.REACT_APP_API_SERVER_BASEURL;
 
 function App() {
   const [postCode, setPostCode] = useState("");
@@ -13,7 +13,7 @@ function App() {
   const onFormSubmit = (link) => {
     // extract code from link
     const regex =
-      /^https?:\/\/(?:www\.)?instagram\.com\/[^\/]+(?:\/[^\/]+)?\/([^\/]{11})\/.*$/;
+      /^https?:\/\/(?:www\.)?instagram\.com\/[^/]+(?:\/[^/]+)?\/([^/]{11})\/.*$/;
     const matched = link.match(regex);
     if (!matched) return;
 
