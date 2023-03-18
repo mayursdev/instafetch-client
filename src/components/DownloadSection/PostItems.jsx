@@ -3,9 +3,10 @@ import ImagePost from "./ImagePost";
 import VideoPost from "./VideoPost";
 
 const PostItems = (props) => {
-  const { postDetails } = props;
-
-  const { user } = postDetails;
+  const { postDetails, error } = props;
+  const isPostDetailsEmpty =
+    !postDetails || Object.keys(postDetails).length === 0;
+  const user = !isPostDetailsEmpty && postDetails.user;
 
   const renderPostItem = (postDetails) => {
     const isImagePost = postDetails.media_type === 1;
@@ -31,9 +32,16 @@ const PostItems = (props) => {
     else return renderPostItem(postDetails);
   };
 
+  const renderError = (error) => {
+    return error && <p>{error}</p>;
+  };
+
   return (
-    <div className="posts-list container mx-auto py-4 md:py-6 sm:flex sm:flex-wrap sm:gap-0 sm:justify-center">
-      {renderPost(postDetails)}
+    <div className="posts-list container mx-auto py-4 md:py-6">
+      {error && renderError(error)}
+      <div className="sm:flex sm:flex-wrap sm:gap-0 sm:justify-center">
+        {!isPostDetailsEmpty && renderPost(postDetails)}
+      </div>
     </div>
   );
 };

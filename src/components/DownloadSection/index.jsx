@@ -3,14 +3,12 @@ import PostItems from "./PostItems";
 import Loader from "../Loader";
 
 const DownloadSection = (props) => {
-  const { postDetails, isLoading } = props;
-
-  const isPostDetailsEmpty = Object.keys(postDetails).length === 0;
+  const { postDetails, isLoading, error } = props;
 
   return (
     <section className="px-4 min-h-screen relative">
-      {isLoading === true ? <Loader /> : null}
-      {!isPostDetailsEmpty ? <PostItems postDetails={postDetails} /> : null}
+      {isLoading && <Loader />}
+      <PostItems postDetails={postDetails} error={error} />
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import DownloadSection from "./components/DownloadSection";
@@ -10,6 +11,10 @@ function App() {
   const [postCode, setPostCode] = useState("");
   const [postDetails, setPostDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const defaultServerErrorMsg =
+    "Sorry, there was an error fetching post from instafetch servers..";
 
   const onFormSubmit = (link) => {
     // extract code from link
@@ -23,16 +28,33 @@ function App() {
     setPostCode(extractedPostCode);
   };
 
+  const fetchPostDetails = async (postCode) => {
+    try {
+      const { data } = await axios({
+        url: `${InstaAPIBaseURL}/posts/${postCode}`,
+        method: "GET",
+      });
+      if (data.status === "fail") {
+        throw new Error("response status fail");
+      }
+      return data;
+    } catch (error) {
+      console.log(error);
+      setError(defaultServerErrorMsg);
+      return error;
+    }
+  };
+
   useEffect(() => {
     if (!postCode) return;
     // make api call to fetch post details
     (async () => {
-      setIsLoading((prev) => !prev);
-      const response = await fetch(`${InstaAPIBaseURL}/posts/${postCode}`);
-      const postDetailsResp = await response.json();
-      if (postDetailsResp.status === "fail") return;
-      setPostDetails(postDetailsResp.postDetails);
-      setIsLoading((prev) => !prev);
+      setIsLoading(true);
+      const postDetailsResp = await fetchPostDetails(postCode);
+      if (postDetailsResp.status !== "fail") {
+        setPostDetails(postDetailsResp.postDetails);
+      }
+      setIsLoading(false);
     })();
   }, [postCode]);
 
@@ -40,7 +62,11 @@ function App() {
     <div className="font-nunito">
       <Navbar />
       <Header onFormSubmit={onFormSubmit} />
-      <DownloadSection postDetails={postDetails} isLoading={isLoading} />
+      <DownloadSection
+        postDetails={postDetails}
+        isLoading={isLoading}
+        error={error}
+      />
       <Footer />
     </div>
   );
